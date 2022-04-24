@@ -1,0 +1,63 @@
+<block type="setVelocityX" id="Pg%+8O$%J*@0xD[+]M2]" x="106" y="128">
+    <value name="velocityX">
+        <block type="math_number" id="n1+:M`sP{.wv$n6uty]=">
+            <field name="NUM">100</field>
+        </block>
+    </value>
+    <next>
+        <block type="controls_repeat_ext" id="TE7})^G*|g@b;v!0I~8)">
+            <value name="TIMES">
+                <block type="math_number" id="+ON{?U8J*71_to|nr6FT">
+                    <field name="NUM">1000</field>
+                </block>
+            </value>
+            <statement name="DO">
+                <block type="print" id="zeVm.SW|hdw)5=bN.2W0">
+                    <value name="MSG">
+                        <block type="getMuscleEnergy" id="(=4CRs1|W*UaG^x70.In"></block>
+                    </value>
+                    <next>
+                        <block type="controls_if" id="awq]x7WmwT1yFAIe6oZi">
+                            <value name="IF0">
+                                <block type="logic_compare" id="L8,MY16Hxpr4=y~MS:D5">
+                                    <field name="OP">LT</field>
+                                    <value name="A">
+                                        <block type="math_number" id="6${P}V^Y^GM~GOxu#/dZ">
+                                            <field name="NUM">0.4</field>
+                                        </block>
+                                    </value>
+                                    <value name="B">
+                                        <block type="getMuscleEnergy" id="cnbOVNE-gkf,?Hxqgv!L"></block>
+                                    </value>
+                                </block>
+                            </value>
+                            <statement name="DO0">
+                                <block type="setVelocityY" id="/+!!yN=hy+0SO|xMv=-.">
+                                    <value name="velocityY">
+                                        <block type="math_number" id="|EztT|t^K^GA+B3^EU2!">
+                                            <field name="NUM">-500</field>
+                                        </block>
+                                    </value>
+                                </block>
+                            </statement>
+                            <next>
+                                <block type="setVelocityX" id="7#9~m8^[(@sm2Eb/pQLi">
+                                    <value name="velocityX">
+                                        <block type="math_number" id="SQp^rGX#a~V+O{(vK;q*">
+                                            <field name="NUM">100</field>
+                                        </block>
+                                    </value>
+                                    <next>
+                                        <block type="wait_seconds" id="*G035a_)u)d$scAYPHat">
+                                            <field name="SECONDS">0.1</field>
+                                        </block>
+                                    </next>
+                                </block>
+                            </next>
+                        </block>
+                    </next>
+                </block>
+            </statement>
+        </block>
+    </next>
+</block>

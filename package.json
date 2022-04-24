@@ -1,0 +1,22 @@
+{
+  "name": "bci_examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bcijs": "^1.6.1",
+    "express": "^4.16.4",
+    "http": "^0.0.0",
+    "install": "^0.12.2",
+    "node-osc": "^3.0.0",
+    "npm": "^6.8.0",
+    "socket.io": "^2.2.0",
+    "sudo": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
