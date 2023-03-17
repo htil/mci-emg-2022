@@ -9,7 +9,7 @@ class Visualizer {
     this.numX = Math.round(this.canvas.width);
     this.wglp = new WebglPlot(this.canvas);
     this.numLines = numOfLines;
-    this.scaleY = 1;
+    this.scaleY = 0.05;
     this.fpsCounter = 0;
     this.fpsDivder = 5;
     this.trackDataHolder = [];
