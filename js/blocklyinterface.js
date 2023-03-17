@@ -14,6 +14,7 @@ var BlocklyInterface = function () {
   window.runner = null;
   window.latestCode = "";
   window.editorMode = "block";
+  window.highlightPause = false;
 
   window.workspace = Blockly.inject("blocklyDiv", {
     media: "https://unpkg.com/browse/blockly/media/",
@@ -38,8 +39,8 @@ var BlocklyInterface = function () {
   };
 
   window.generateCodeAndLoadIntoInterpreter = function () {
-    //Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
-    //Blockly.JavaScript.addReservedWords('highlightBlock');
+    Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+    Blockly.JavaScript.addReservedWords('highlightBlock');
     window.latestCode = Blockly.JavaScript.workspaceToCode(window.workspace);
     let xml = Blockly.Xml.workspaceToDom(window.workspace);
     console.log(xml);
@@ -90,7 +91,7 @@ var BlocklyInterface = function () {
 
     // setVelocityY
     var wrapper = function (cmd, something) {
-      window.player.setVelocityY(cmd);
+      window.player.setVelocityY(cmd * -1);
     };
     interpreter.setProperty(
       globalObject,
@@ -154,6 +155,8 @@ var BlocklyInterface = function () {
       interpreter.createNativeFunction(wrapper)
     );
 
+
+    // Expression Score
     var wrapper = function (expression) {
       try {
         console.log("expression", expression);
@@ -168,6 +171,8 @@ var BlocklyInterface = function () {
       interpreter.createNativeFunction(wrapper)
     );
 
+
+    // Get Speech
     var wrapper = function () {
       try {
         return `${window.lastSpeech}`;
@@ -181,6 +186,8 @@ var BlocklyInterface = function () {
       interpreter.createNativeFunction(wrapper)
     );
 
+
+    // Speak
     var wrapper = function (text) {
       try {
         window.synthesizeSpeech(text);
@@ -194,6 +201,8 @@ var BlocklyInterface = function () {
       interpreter.createNativeFunction(wrapper)
     );
 
+
+    // Update Face
     var wrapper = function (emotion, gaze, color) {
       try {
         window.updateFace(emotion, gaze, color);
@@ -207,6 +216,8 @@ var BlocklyInterface = function () {
       interpreter.createNativeFunction(wrapper)
     );
 
+
+    // Get Physio
     var wrapper = function () {
       try {
         //console.log(window.filteredSample);
@@ -222,14 +233,36 @@ var BlocklyInterface = function () {
       interpreter.createNativeFunction(wrapper)
     );
 
+    // Handle highlighting
+    function highlightBlock(id) {
+      window.workspace.highlightBlock(id);
+      console.log("block ID", id)
+      setTimeout(() => {
+        window.workspace.highlightBlock(null);
+      }, 1000)
+      
+      //window.highlightPause = true;
+    }
+
+    // Add an API function for highlighting blocks.
+    const wrapperHighlight = function(id) {
+      id = String(id || '');
+      return highlightBlock(id);
+    };
+    interpreter.setProperty(globalObject, 'highlightBlock',
+        interpreter.createNativeFunction(wrapperHighlight));
+
     // Add an API for the wait block.  See wait_block.js
     initInterpreterWaitForSeconds(interpreter, globalObject);
   };
+
+  
 
   window.runBlocklyCode = function () {
     //console.log("latest Code: ", window.latestCode);
     //console.log("Editor mode? ", window.editorMode);
     //console.log("Text code is ", window.textEditor.getValue());
+    window.workspace.highlightBlock(null);
     if (window.editorMode == "block") {
       window.interpreter = new Interpreter(window.latestCode, window.initApi);
     } else {
@@ -243,7 +276,13 @@ var BlocklyInterface = function () {
       if (!window.interpreter) return;
 
       // console.log("running", window.interpreter)
-      var hasMore = window.interpreter.run();
+
+      // Run is the example provided for async apps. However highlighting does not work well 
+      //var hasMore = window.interpreter.run();
+
+      var hasMore = window.interpreter.step();
+
+
       //console.log("hasMore: ", hasMore)
       if (hasMore) {
         setTimeout(window.runner, 10);
@@ -268,7 +307,9 @@ BlocklyInterface.prototype.init = function () {
       // Something changed. Parser needs to be reloaded.
       window.resetInterpreter();
       window.generateCodeAndLoadIntoInterpreter();
-      window.runBlockCode();
+
+      // Don't run code until user is ready to run code
+      //window.runBlockCode();
     }
   });
 };

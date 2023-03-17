@@ -105,8 +105,16 @@ var Main = function () {
 
   this.handleEvents = function () {
     this.createEventListener("runButton", window.runBlockCode);
+    this.createEventListener("stopButton", this.stopProgram);
   };
+
 };
+
+Main.prototype.stopProgram = function(){
+  window.resetPhaser();
+  window.resetInterpreter();
+  window.workspace.highlightBlock(null);
+}
 
 Main.prototype.start = function () {
   //window.ros.init()
