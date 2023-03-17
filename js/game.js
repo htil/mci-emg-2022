@@ -81,6 +81,13 @@ function create() {
 
   window.player = player;
 
+  window.resetPhaser = function() {
+    player.setVelocityX(0);
+    player.setVelocityY(0);
+    player.x = 200
+    player.y = 200
+  }
+
   // player walk animation
   this.anims.create({
     key: "walk",
