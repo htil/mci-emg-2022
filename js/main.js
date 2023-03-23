@@ -113,7 +113,6 @@ var Main = function () {
 Main.prototype.stopProgram = function(){
   window.resetPhaser();
   window.resetInterpreter();
-  window.workspace.highlightBlock(null);
 }
 
 Main.prototype.start = function () {

@@ -236,6 +236,15 @@ var BlocklyInterface = function () {
     // Handle highlighting
     function highlightBlock(id) {
       window.workspace.highlightBlock(id);
+      //console.log("block ID", id)
+
+      /*
+      setTimeout(() => {
+        window.workspace.highlightBlock(null);
+      }, 1000)
+      */
+      
+      //window.highlightPause = true;
     }
 
     // Add an API function for highlighting blocks.
