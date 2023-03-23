@@ -32,6 +32,7 @@ var BlocklyInterface = function () {
   // Clear interpreter
   window.resetInterpreter = function () {
     window.interpreter = null;
+    window.workspace.highlightBlock(null);
     if (window.runner) {
       clearTimeout(window.runner);
       window.runner = null;
