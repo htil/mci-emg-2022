@@ -32,6 +32,7 @@ var BlocklyInterface = function () {
   // Clear interpreter
   window.resetInterpreter = function () {
     window.interpreter = null;
+    window.workspace.highlightBlock(null);
     if (window.runner) {
       clearTimeout(window.runner);
       window.runner = null;
@@ -236,6 +237,15 @@ var BlocklyInterface = function () {
     // Handle highlighting
     function highlightBlock(id) {
       window.workspace.highlightBlock(id);
+      //console.log("block ID", id)
+
+      /*
+      setTimeout(() => {
+        window.workspace.highlightBlock(null);
+      }, 1000)
+      */
+      
+      //window.highlightPause = true;
     }
 
     // Add an API function for highlighting blocks.
