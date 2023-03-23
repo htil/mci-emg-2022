@@ -42,7 +42,9 @@
 <!--<script src="js/ros.js"></script> -->
 <!--<script src="js/fili.min.js"></script>-->
 <script src="js/customblock.js"></script>
+>
 <script src="js/blocklyinterface.js"></script>
+
 <!--<script src="js/baxter.js"></script>-->
 <!--<script src="js/vis.js"></script>-->
 <!--<script src="js/artyom.window.min.js"></script>-->
@@ -84,24 +86,45 @@
 </head>
 <body style="background-color: lightgrey;">
   
-<div style="position: absolute; right: 10px; top: 20px">
+<div style="position: absolute; right: 5px; top: 20px">
   <button id="runButton" class="huge circular ui green icon button" style="display: inherit; margin-left: auto">
     <i class="icon play"></i>
   </button>
 </div>
 
 
-<div style="position: absolute; right: 10px; top: 80px">
+<div style="position: absolute; right: 5px; top: 80px">
   <button id="stopButton" class="huge circular ui red icon button" style="display: inherit; margin-left: auto">
     <i class="icon stop"></i>
   </button>
 </div>
 
-<div style="position: absolute; right: 10px; top: 140px">
+<div style="position: absolute; right: 5px; top: 140px">
   <button id="connect" class="huge circular ui blue icon button" style="display: inherit; margin-left: auto">
     <i class="icon bluetooth"></i>
   </button>
 </div>
+
+<div style="position: absolute; right: 5px; top: 200px">
+  <button
+    id="saveFile"
+    class="huge circular ui pink icon button"
+    style="display: inherit; margin-left: auto"
+  >
+    <i class="save icon"></i>
+  </button>
+</div>
+
+<div style="position: absolute; right: 5px; top: 260px">
+  <button
+    id="uploadFile"
+    class="huge circular ui pink icon button"
+    style="display: inherit; margin-left: auto"
+  >
+    <i class="upload icon"></i>
+  </button>
+</div>
+
 
 <!--
 <div style="position: absolute; right: 10px; top: 200px">
@@ -150,6 +173,7 @@
   <div class="column" style="background-color: lightgrey; width: 55%;">
     <div id="blocklyDiv"  style=" height: 100%; width: 100%; display: inline;"></div>
     <div id="textCode"  style=" height: 100%; width: 100%; display: none; background-color: white; padding: 10px;"></div>
+    <input type="file" id="file_handler" style="visibility: hidden;"/>
   </div>
 
 
@@ -346,4 +370,5 @@
 </script>
 
 <script type="module" src="js/physio_emg.js"></script>
+<script src="js/file_handler.js"></script
 </html>
