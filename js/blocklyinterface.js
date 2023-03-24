@@ -44,7 +44,7 @@ var BlocklyInterface = function () {
     Blockly.JavaScript.addReservedWords('highlightBlock');
     window.latestCode = Blockly.JavaScript.workspaceToCode(window.workspace);
     let xml = Blockly.Xml.workspaceToDom(window.workspace);
-    console.log(xml);
+    //console.log(xml);
 
     // sync code. comment to stop synching
     window.textEditor.setValue(window.latestCode);
